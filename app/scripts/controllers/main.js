@@ -10,7 +10,6 @@
 angular.module('mytodoApp')
   .controller('MainCtrl', function ($scope, localStorageService) {
     var todosInStore = localStorageService.get('todos');
-
     $scope.todos = todosInStore || [];
 
     $scope.$watch('todos', function () {

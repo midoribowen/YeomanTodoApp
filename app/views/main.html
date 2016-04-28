@@ -4,21 +4,34 @@
   <form role="form" ng-submit="addTodo()">
     <div class="row">
       <div class="input-group">
-        <input type="text" ng-model="todo" placeholder="What needs to be done?" class="form-control">
-        <span class="input-group-btn">
-          <input type="submit" class="btn btn-primary" value="Add">
-        </span>
+        Date: <input type="date" ng-model="todo.date" style="margin:5px;"> <br />
+        Time: <input type="time" ng-model="todo.time" placeholder="HH:mm:ss" style="margin:5px;"> <br />
+        Name: <input type="text" ng-model="todo.name" placeholder="Who's going to do it?" size="30" style="margin:5px;">
+        <br />
+        Item: <input type="text" ng-model="todo.item" placeholder="What needs to be done?" size="30" style="margin:5px;">
+        <br />
+        <input type="submit" class="btn btn-primary" value="Add" style="margin:5px;">
       </div>
     </div>
   </form>
 
+  <hr>
+
   <!-- Todos list -->
   <div ui-sortable ng-model="todos">
-    <p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px; cursor: move;">
-      <input type="text" ng-model="todo" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
-      </span>
-    </p>
+    <table border="1" width="100%">
+      <tr>
+        <th style="padding:3px;">Date</th>
+        <th style="padding:3px;">Time</th>
+        <th style="padding:3px;">Name</th>
+        <th style="padding:3px;">Item</th>
+      </tr>
+      <tr ng-repeat="todo in todos">
+        <td style="padding:3px;">{{todo.date | date:'MM/dd/yyyy'}}</td>
+        <td style="padding:3px;">{{todo.time | date:'hh:mm a'}}
+        <td style="padding:3px;">{{todo.name}}</td>
+        <td style="padding:3px;">{{todo.item}} <button class="btn btn-danger btn-sm" ng-click="removeTodo($index)" aria-label="Remove" style="float:right;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+      </tr>
+    </table>
   </div>
 </div>

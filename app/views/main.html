@@ -1,26 +1,32 @@
 <div class="container">
   <h2>My todos</h2>
   <!-- Todos input -->
-  <form role="form" name="todoForm"ng-submit="addTodo()">
+  <form role="form" name="todoForm"ng-submit="addTodo()" novalidate>
     <div class="row">
       <div class="input-group">
-        Date: <input type="date" name="todoDate" ng-model="todo.date" style="margin:5px;" required>
-        <span ng-show="todoForm.todoDate.$touched && todoForm.todoDate.$invalid" style="color:#ff0000;"> Please assign a date
+        Date: <input type="date" name="date" ng-model="todo.date" style="margin:5px;" required />
+          <span ng-messages="todoForm.date.$touched && todoForm.date.$error" style="color:red;" role="alert">
+            <span ng-message="required">Please assign a date</span>
+          </span>
+        <br />
+        Time: <input type="time" name="time" ng-model="todo.time" style="margin:5px;" required />
+        <span ng-messages="todoForm.time.$touched && todoForm.time.$error" style="color:red;" role="alert">
+          <span ng-message="required">Please assign a time</span>
         </span>
         <br />
-        Time: <input type="time" name="todoTime" ng-model="todo.time" style="margin:5px;" required>
-        <span ng-show="todoForm.todoTime.$touched && todoForm.todoTime.$invalid" style="color:#ff0000;">Please assign a time
+        Name: <input type="text" name="name" ng-model="todo.name" placeholder="Who's going to do it?" size="30" ng-minlength="2" ng-maxlength="30" style="margin:5px;" required />
+        <span ng-messages="todoForm.name.$touched && todoForm.name.$error" style="color:red;" role="alert">
+          <span ng-message="required">Please assign a name</span>
+          <span ng-message-exp="['minlength', 'maxlength']">Name must be between 2 and 30 characters long</span>
         </span>
         <br />
-        Name: <input type="text" name="todoName" ng-model="todo.name" placeholder="Who's going to do it?" size="30" style="margin:5px;" required>
-        <span ng-show="todoForm.todoName.$touched && todoForm.todoName.$invalid" style="color:#ff0000;">Please assign a name
+        Item: <input type="text" name="item" ng-model="todo.item" size="30" ng-minlength="5" ng-maxlength="30" style="margin:5px;" placeholder="What needs to be done?" required />
+        <span ng-messages="todoForm.item.$touched && todoForm.item.$error" style="color:red;" role="alert">
+          <span ng-message="required">Please add an item</span>
+          <span ng-message-exp="['minlength', 'maxlength']">Item must be between 5 and 30 characters long</span>
         </span>
         <br />
-        Item: <input type="text" name="todoItem" ng-model="todo.item" size="30" style="margin:5px;" placeholder="What needs to be done?" required>
-        <span ng-show="todoForm.todoItem.$touched && todoForm.todoItem.$invalid" style="color:#ff0000;">Please add a description
-        </span>
-        <br />
-        <input type="submit" class="btn btn-primary" value="Add" style="margin:5px;">
+        <input type="submit" class="btn btn-primary" value="Add" style="margin:5px;" ng-disabled="todoForm.$invalid">
       </div>
     </div>
   </form>

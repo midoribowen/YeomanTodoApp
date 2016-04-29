@@ -1,14 +1,24 @@
 <div class="container">
   <h2>My todos</h2>
   <!-- Todos input -->
-  <form role="form" ng-submit="addTodo()">
+  <form role="form" name="todoForm"ng-submit="addTodo()">
     <div class="row">
       <div class="input-group">
-        Date: <input type="date" ng-model="todo.date" style="margin:5px;"> <br />
-        Time: <input type="time" ng-model="todo.time" placeholder="HH:mm:ss" style="margin:5px;"> <br />
-        Name: <input type="text" ng-model="todo.name" placeholder="Who's going to do it?" size="30" style="margin:5px;">
+        Date: <input type="date" name="todoDate" ng-model="todo.date" style="margin:5px;" required>
+        <span ng-show="todoForm.todoDate.$touched && todoForm.todoDate.$invalid" style="color:#ff0000;"> Please assign a date
+        </span>
         <br />
-        Item: <input type="text" ng-model="todo.item" placeholder="What needs to be done?" size="30" style="margin:5px;">
+        Time: <input type="time" name="todoTime" ng-model="todo.time" style="margin:5px;" required>
+        <span ng-show="todoForm.todoTime.$touched && todoForm.todoTime.$invalid" style="color:#ff0000;">Please assign a time
+        </span>
+        <br />
+        Name: <input type="text" name="todoName" ng-model="todo.name" placeholder="Who's going to do it?" size="30" style="margin:5px;" required>
+        <span ng-show="todoForm.todoName.$touched && todoForm.todoName.$invalid" style="color:#ff0000;">Please assign a name
+        </span>
+        <br />
+        Item: <input type="text" name="todoItem" ng-model="todo.item" size="30" style="margin:5px;" placeholder="What needs to be done?" required>
+        <span ng-show="todoForm.todoItem.$touched && todoForm.todoItem.$invalid" style="color:#ff0000;">Please add a description
+        </span>
         <br />
         <input type="submit" class="btn btn-primary" value="Add" style="margin:5px;">
       </div>
